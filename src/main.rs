@@ -21,7 +21,7 @@ fn main() {
     }
 
     // Working with struct and method
-    let database = Database::new().expect("Database::new() crashed");
+    let database = Database::new().expect("Creating db failed");
 }
 
 struct Database {
@@ -40,15 +40,13 @@ impl Database {
         // Write an equal to above function
         let contens = std::fs::read_to_string("cmdrs.db")?;
         let mut map = HashMap::new();
-        
+
         for line in contens.lines() {
             let mut chunks = line.splitn(2, "\t");
             let key =  chunks.next().expect("No Key!");
             let value =  chunks.next().expect("No value!");
-            map.insert(key, value);
+            map.insert(key.to_owned(), value.to_owned());
         }
-        // parse this string
-
         // populate our map
         Ok(Database { map: map})
     }
