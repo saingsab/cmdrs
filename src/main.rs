@@ -60,9 +60,11 @@ impl Database {
 
     fn flush(self) -> std::io::Result<()> {
         let mut contents = String::new();
-        for pairs in self.map {
-            let cmdpair = format!("{}\t{}\n", pairs.0, pairs.1);
-            contents.push_str(&cmdpair);
+        for (key, value) in &self.map {
+            contents.push_str(key);
+            contents.push('\t');
+            contents.push_str(value);
+            contents.push('\n');
         }
         std::fs::write("cmdrs.db", contents)
     }
