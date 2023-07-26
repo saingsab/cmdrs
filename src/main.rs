@@ -62,9 +62,9 @@ impl Database {
         let mut contents = String::new();
         for (key, value) in &self.map {
             contents.push_str(key);
-            contents.push('\t');
+            contents.push('\t'); //tap 
             contents.push_str(value);
-            contents.push('\n');
+            contents.push('\n'); //new line
         }
         std::fs::write("cmdrs.db", contents)
     }
